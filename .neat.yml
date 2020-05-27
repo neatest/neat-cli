@@ -3,11 +3,11 @@ ask:
   - id: cli_type
     description: What type of cli do you want? Single is like 'ls' and 'curl'. Multi is like 'git' or 'homebrew'.
     default: [single, multi]
+pre-download:
+  - npx oclif $NEAT_ASK_CLI_TYPE --options=yarn,typescript,eslint,mocha --defaults
 inject:
   - id: contribute
     file: readme/contribute.md
     target: README.md
     pattern: <!-- Project specific guidelines -->
 ignore: [README.md, readme]
-post-run:
-  - npx oclif $NEAT_ASK_CLI_TYPE --options=yarn,typescript,eslint,mocha --defaults

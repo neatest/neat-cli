@@ -47,6 +47,6 @@ Check out our [repo template](https://github.com/olivr-templates/neat-repo) whic
 For example, you can run:
 
 ```sh
-neat repo
 neat cli
+neat repo
 ```
