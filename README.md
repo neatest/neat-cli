@@ -11,7 +11,7 @@ You can use it in conjunction with other templates such as [Neat Repo](https://g
 - Tests with mocha
 - CLI [contribution guidelines](inject/contribute.md)
 - CLI specific [readme section](inject/installation.md)
-- [Github workflow](.github/workflows/cli.yml) to test/build/publish your CLI
+- [Github action](actions/cli.yml) to test/build/publish your CLI
 
 ## Usage
 

@@ -1,3 +1,6 @@
+symlink:
+  - .github/workflows/cli.yml: actions/cli.yml
+
 pre-run:
   - node script/script.js pre-run
 
@@ -21,4 +24,4 @@ inject:
     file: inject/installation.md
     target: README.md
 
-ignore: [README.md, inject, script]
+ignore: [README.md, actions, inject, script]
