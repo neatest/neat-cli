@@ -1,13 +1,24 @@
+pre-run:
+  - node script/script.js pre-run
+
 ask:
-  # Questions for this repo
-  - id: cli_type
+  - id: cli-type
     description: What type of cli do you want? Single is like 'ls' and 'curl'. Multi is like 'git' or 'homebrew'.
     default: [single, multi]
+  - id: npm-name
+    description: What is the name of your NPM package? ('name' format or '@scope/name' format)
+    default: ${node -e 'console.log(process.cwd().match(/\/([^/]*)$/)[1])'}
+
 pre-download:
   - npx oclif $NEAT_ASK_CLI_TYPE --options=yarn,typescript,eslint,mocha --defaults
+  - node script/script.js pre-download
+
 inject:
-  - id: contribute
-    file: readme/contribute.md
+  - id: project-contributing
+    file: inject/contribute.md
+    target: [README.md, docs/CONTRIBUTE.md]
+  - id: project-installation
+    file: inject/installation.md
     target: README.md
-    pattern: <!-- Project specific guidelines -->
-ignore: [README.md, readme]
+
+ignore: [README.md, inject, script]

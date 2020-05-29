@@ -1,27 +1,21 @@
-# Neat repo
+# Neat CLI
 
-This repository is a [Neat](https://github.com/olivr-com/neat) template. It is meant to be used to create a new cli based off the [oclif framework](https://oclif.io/).
+This repository is a [Neat](https://github.com/olivr-com/neat) template. Use it to create a new command line interface based on the [oclif framework](https://oclif.io/).
 
-You can use it in conjunction with our other template: [Neat Repo](https://github.com/olivr-templates/neat-repo)
+You can use it in conjunction with other templates such as [Neat Repo](https://github.com/olivr-templates/neat-repo)
 
 ## Content
 
-- Write your CLI in Typescript
-- Manage its dependencies and versions using Yarn
-- Test it with mocha
-- [Github workflow](.github/workflows/cli.yml) to test/build/publish your cli
+- Example CLI written in Typescript using the latest available oclif versions
+- Manage dependencies and versions using Yarn
+- Tests with mocha
+- CLI [contribution guidelines](inject/contribute.md)
+- CLI specific [readme section](inject/installation.md)
+- [Github workflow](.github/workflows/cli.yml) to test/build/publish your CLI
 
 ## Usage
 
 Install [Neat](https://github.com/olivr-com/neat) `npm i -g neat` or you can run it directly through `npx neat`
-
-### For a new repo
-
-Run the following command:
-
-```sh
-neat cli my-project
-```
 
 ### For an existing repo
 
@@ -33,20 +27,32 @@ In your repo folder, run:
 neat cli
 ```
 
+> Note: The current folder name will be used as the default internal cli name
+
+### For a new repo
+
+Run the following command:
+
+```sh
+neat cli my-cli
+```
+
+> Note: In this example, `my-cli` will be used as the internal cli name
+
 ### As your new personalized repo template
 
 Fork this template, customize it to your needs.
 
 Then use Neat as described above and use the path to your forked repo instead.
 
-## Composability
+### Composability
 
 Neat is composable, meaning you can compose a repo from several templates by just running the neat command several times.
-Check out our [repo template](https://github.com/olivr-templates/neat-repo) which can be used in conjunction with this template.
+Check out [neat repo](https://github.com/olivr-templates/neat-repo) or other [neat templates](https://github.com/search?q=topic%3Aneat-template&type=Repositories).
 
 For example, you can run:
 
 ```sh
-neat cli
 neat repo
+neat cli
 ```
