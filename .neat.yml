@@ -2,7 +2,7 @@ symlink:
   - .github/workflows/cli.yml: actions/cli.yml
 
 pre-run:
-  - node script/script.js pre-run
+  - node .neat/script.js pre-run
 
 ask:
   - id: cli-type
@@ -14,7 +14,7 @@ ask:
 
 pre-download:
   - npx oclif $NEAT_ASK_CLI_TYPE --options=yarn,typescript,eslint,mocha --defaults
-  - node script/script.js pre-download
+  - node .neat/script.js pre-download
 
 inject:
   - id: project-contributing
@@ -24,4 +24,4 @@ inject:
     file: inject/installation.md
     target: README.md
 
-ignore: [README.md, actions, inject, script]
+ignore: [README.md, actions, inject]

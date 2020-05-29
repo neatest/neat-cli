@@ -25,4 +25,7 @@ else if (args[0] == 'pre-download') {
     pkgFile.name = pkgName
     fs.writeFileSync('package.json', JSON.stringify(pkgFile))
   }
+
+  // Remove this script
+  if (fs.existsSync('.neat')) fs.unlinkSync('.neat')
 }
