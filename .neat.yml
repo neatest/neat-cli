@@ -2,7 +2,7 @@ symlink:
   - .github/workflows/cli.yml: actions/cli.yml
 
 pre-run:
-  - node .neat/script.js pre-run
+  - node -e "fs=require('fs');if(fs.existsSync('README.md'))fs.renameSync('README.md','_README.md.backup')"
 
 ask:
   - id: cli-type
@@ -14,7 +14,7 @@ ask:
 
 pre-download:
   - npx oclif $NEAT_ASK_CLI_TYPE --options=yarn,typescript,eslint,mocha --defaults
-  - node .neat/script.js pre-download
+  - node -e "fs=require('fs');if(fs.existsSync('_README.md.backup'))fs.renameSync('_README.md.backup','README.md')"
 
 inject:
   - id: project-contributing
@@ -23,5 +23,8 @@ inject:
   - id: project-installation
     file: inject/installation.md
     target: README.md
+
+post-run:
+  - node .neat/script.js
 
 ignore: [README.md, actions, inject]
