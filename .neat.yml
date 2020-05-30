@@ -3,6 +3,9 @@ symlink:
 
 pre-run:
   - node -e "fs=require('fs');if(fs.existsSync('README.md'))fs.renameSync('README.md','_README.md.backup')"
+  - script: |
+    const current_folder = process.cwd().match(/\/([^/]*)$/)[1]
+    process.env['NEAT_ASK_NPM_NAME'] = current_folder
 
 ask:
   - id: cli-type
@@ -10,16 +13,16 @@ ask:
     default: [single, multi]
   - id: npm-name
     description: What is the name of your NPM package? ('name' format or '@scope/name' format)
-    default: ${node -e 'console.log(process.cwd().match(/\/([^/]*)$/)[1])'}
 
 pre-download:
   - npx oclif $NEAT_ASK_CLI_TYPE --options=yarn,typescript,eslint,mocha --defaults
   - node -e "fs=require('fs');if(fs.existsSync('_README.md.backup'))fs.renameSync('_README.md.backup','README.md')"
 
 inject:
-  - id: project-contributing
+  - id: cli-contribute
     file: inject/contribute.md
     target: [README.md, docs/CONTRIBUTE.md]
+    after: <!-- project-contributing -->
   - id: project-installation
     file: inject/installation.md
     target: README.md
