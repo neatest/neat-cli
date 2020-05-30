@@ -9,5 +9,5 @@ if (pkgName && fs.existsSync('package.json')) {
 }
 
 // Remove this script
-if (fs.existsSync('.neat/script.js')) fs.unlinkSync('.neat/script.js')
-if (fs.existsSync('.neat')) fs.rmdirSync('.neat')
+fs.unlinkSync(__filename)
+fs.rmdirSync(__dirname)
