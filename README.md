@@ -13,6 +13,10 @@ You can use it in conjunction with other templates such as [Neat Repo](https://g
 - CLI specific [readme section](inject/installation.md)
 - [Github action](actions/cli.yml) to test/build/publish your CLI
 
+## Requirements
+
+- Obtain an [authentication token from NPM](https://docs.npmjs.com/creating-and-viewing-authentication-tokens) and set it as the `NPM_TOKEN` Github secret for your repo (this is used to publish your CLI)
+
 ## Usage
 
 Install [Neat](https://github.com/olivr-com/neat) `npm i -g neat` or you can run it directly through `npx neat`

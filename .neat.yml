@@ -12,6 +12,7 @@ ask:
     default: [single, multi]
   - id: npm-name
     description: What is the name of your NPM package? ('name' format or '@scope/name' format)
+    replace: true
 
 pre-download:
   - npx oclif $NEAT_ASK_CLI_TYPE --options=yarn,typescript,eslint,mocha --defaults
