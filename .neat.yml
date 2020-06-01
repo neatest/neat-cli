@@ -2,10 +2,9 @@ symlink:
   - .github/workflows/cli.yml: actions/cli.yml
 
 pre-run:
-  - node -e "fs=require('fs');if(fs.existsSync('README.md'))fs.renameSync('README.md','_README.md.backup')"
   - script: |
-    const current_folder = process.cwd().match(/\/([^/]*)$/)[1]
-    process.env['NEAT_ASK_NPM_NAME'] = current_folder
+      if(fs.existsSync('README.md')) fs.renameSync('README.md','_README.md.backup')
+      process.env.NEAT_ASK_NPM_NAME = process.cwd().match(/\/([^/]*)$/)[1]
 
 ask:
   - id: cli-type
@@ -16,7 +15,7 @@ ask:
 
 pre-download:
   - npx oclif $NEAT_ASK_CLI_TYPE --options=yarn,typescript,eslint,mocha --defaults
-  - node -e "fs=require('fs');if(fs.existsSync('_README.md.backup'))fs.renameSync('_README.md.backup','README.md')"
+  - script: if(fs.existsSync('_README.md.backup')) fs.renameSync('_README.md.backup','README.md')
 
 inject:
   - id: cli-contribute
