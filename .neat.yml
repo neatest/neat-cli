@@ -49,4 +49,4 @@ post-run:
         fs.writeFileSync('package.json', JSON.stringify(pkgFile, null, 2))
       }
 
-ignore: [README.md, actions, inject]
+ignore: [actions, inject]
