@@ -38,8 +38,10 @@ inject:
     wrap:
       before: |
         <!-- cli-output -->
+
         ```sh
       after: |
+
         ```
         <!-- cli-output -->
     target: README.md
