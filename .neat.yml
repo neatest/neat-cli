@@ -35,11 +35,14 @@ inject:
     after: <!-- project-usage -->
   - id: cli-output
     command: ./bin/run --help
-    pattern: '{{cli-output}}'
     wrap:
-      before: <!-- cli-output -->\n\n```sh
-      after: ```\n\n<!-- cli-output -->
-    target: README.md
+      before: |
+        <!-- cli-output -->
+        ```sh
+      after: |
+        ```
+        <!-- cli-output -->
+    target: inject/usage.md
 
 post-run:
   - script: |
