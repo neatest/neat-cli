@@ -31,7 +31,7 @@ In your repo folder, run:
 neat cli
 ```
 
-> Note: The current folder name will be used as the default internal cli name
+> ⚠️ The current folder name will be used as the default internal cli name
 
 ### For a new repo
 
@@ -41,7 +41,7 @@ Run the following command:
 neat cli my-cli
 ```
 
-> Note: In this example, `my-cli` will be used as the internal cli name
+> ⚠️ In this example, `my-cli` will be used as the internal cli name
 
 ### As your new personalized repo template
 
