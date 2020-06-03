@@ -16,7 +16,9 @@ ask:
 
 pre-download:
   - npx oclif $NEAT_ASK_CLI_TYPE --options=yarn,typescript,eslint,mocha --defaults
-  - script: if(fs.existsSync('_README.md.backup')) fs.renameSync('_README.md.backup','README.md')
+  - script: |
+      if(fs.existsSync('_README.md.backup')) fs.renameSync('_README.md.backup','README.md')
+      else fs.unlinkSync('README.md')
 
 inject:
   - id: cli-contribute
@@ -42,6 +44,7 @@ post-run:
       if (pkgName && fs.existsSync('package.json')) {
         const pkgFile = JSON.parse(fs.readFileSync('package.json'))
         pkgFile.name = pkgName
+        delete pkgFile.scripts.version
         fs.writeFileSync('package.json', JSON.stringify(pkgFile, null, 2))
       }
 
