@@ -1,4 +1,4 @@
-### Project specifics
+### Project specific
 
 Install dependencies:
 

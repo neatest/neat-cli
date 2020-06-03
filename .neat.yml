@@ -29,14 +29,15 @@ inject:
   - id: project-installation
     file: inject/installation.md
     target: README.md
-  - id: cli-output
-    command: ./bin/run --help
-    pattern: '{{cli-output}}'
-    target: inject/usage.md
   - id: cli-usage
     file: inject/usage.md
     target: README.md
     after: <!-- project-usage -->
+  - id: cli-output
+    command: ./bin/run --help
+    pattern: '{{cli-output}}'
+    wrap: false
+    target: README.md
 
 post-run:
   - script: |
