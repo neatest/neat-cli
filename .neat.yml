@@ -1,5 +1,6 @@
 symlink:
   - .github/workflows/cli.yml: actions/cli.yml
+  - README.md: README.tpl.md
 
 pre-run:
   - script: |
