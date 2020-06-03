@@ -42,7 +42,7 @@ inject:
       after: |
         ```
         <!-- cli-output -->
-    target: inject/usage.md
+    target: README.md
 
 post-run:
   - script: |
