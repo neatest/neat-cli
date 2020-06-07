@@ -4,23 +4,37 @@ symlink:
 
 pre-run:
   - script: |
+      // Save existing readme (if any)
       if(fs.existsSync('README.md')) fs.renameSync('README.md','_README.md.backup')
+
+      // Use current dir as default for NPM package name
       process.env.NEAT_ASK_NPM_NAME = process.cwd().match(/\/([^/]*)$/)[1]
 
 ask:
-  - id: cli-type
-    description: What type of cli do you want? Single is like 'ls' and 'curl'. Multi is like 'git' or 'homebrew'.
-    default: [single, multi]
   - id: npm-name
     description: What is the name of your NPM package? ('name' format or '@scope/name' format)
     replace: true
   - id: npm-access
     description: Is this a public or a private package? (You need to have a NPM subscription for private packages)
     default: [public, private]
+  - id: cli-type
+    description: What type of cli do you want? Single is like 'ls' and 'curl'. Multi is like 'git' or 'homebrew'.
+    default: [single, multi]
+  - id: repo-name
+    description: What is the name of your repository (in the format owner/repo)?
+    replace: true
+  - id: cli-builds
+    description: On which operating systems do you want to test your build?
+    replace: true
+    default:
+      - ubuntu-latest: true
+      - windows-latest: true
+      - macos-latest: true
 
 pre-download:
   - npx oclif $NEAT_ASK_CLI_TYPE --options=yarn,typescript,eslint,mocha --defaults
   - script: |
+      // Restore Readme
       if(fs.existsSync('_README.md.backup')) fs.renameSync('_README.md.backup','README.md')
       else fs.unlinkSync('README.md')
 
@@ -51,14 +65,25 @@ inject:
 
 post-run:
   - script: |
-      // Change package.json with correct npm package
-      const pkgName = process.env.NEAT_ASK_NPM_NAME
-      if (pkgName && fs.existsSync('package.json')) {
+      if (fs.existsSync('package.json')) {
         const pkgFile = JSON.parse(fs.readFileSync('package.json'))
-        pkgFile.name = pkgName
+
+        // Change to correct NPM package name
+        pkgFile.name = process.env.NEAT_ASK_NPM_NAME
+
+        // Make sure oclif doesn't mess with Readme
         delete pkgFile.scripts.version
-        pkgFile.scripts.prepack = "rm -rf lib && tsc -b",
-        pkgFile.publishConfig =  { access: process.env.NEAT_ASK_NPM_ACCESS },
+        pkgFile.scripts.prepack = "rm -rf lib && tsc -b"
+
+        // Define package access
+        pkgFile.publishConfig =  { access: process.env.NEAT_ASK_NPM_ACCESS }
+
+        // Use repo name where relevant
+        const repoName = process.env.NEAT_ASK_REPO_NAME
+        pkgFile.repository = repoName
+        pkgFile.homepage = `https://github.com/${repoName}`
+        pkgFile.bugs =  `https://github.com/${repoName}/issues`
+
         fs.writeFileSync('package.json', JSON.stringify(pkgFile, null, 2))
       }
 
